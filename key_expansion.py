@@ -1,6 +1,6 @@
 # for aes 128 -> 10 rounds -> 11 round keys
 # 4 words/round -> 44 words
-from Crypto.SelfTest.Cipher.test_CBC import nist_aes_mct_files
+from aes_utils import get_hex_str, show_word, show_words
 
 sbox = [
     0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
@@ -37,25 +37,8 @@ rcon_bytes = [
 NK = 4
 
 
-def get_hex_str(byte):
-    hexa = hex(byte)[2:]
-    while len(hexa) < 2:
-        hexa = "0" + hexa
-    return hexa
 
 
-def show_word(word):
-    for byte in word:
-        hexa = get_hex_str(byte)
-        print(hexa, end=" ")
-    print()
-
-
-def show_words(word_list):
-    print(word_list)
-    for nb, word in enumerate(word_list):
-        print(f"w{nb} : ", end="")
-        show_word(word)
 
 
 def rot_word(word):

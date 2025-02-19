@@ -1,4 +1,5 @@
 from key_expansion import expand_key_128_bits
+from aes_utils import get_hex_str, show_state, show_state_dec
 
 sbox = [
     0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
@@ -19,28 +20,6 @@ sbox = [
     0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16
 ]
 
-
-def get_hex_str(byte):
-    hexa = hex(byte)[2:]
-    while len(hexa) < 2:
-        hexa = "0" + hexa
-    return hexa
-
-
-def show_word(word):
-    for byte in word:
-        hexa = get_hex_str(byte)
-        print(hexa, end=" ")
-
-
-def show_state(word_list):
-    print(word_list)
-    print("┌─────────────┐")
-    for nb, word in enumerate(word_list):
-        print("│ ", end="")
-        show_word(word)
-        print("│")
-    print("└─────────────┘")
 
 def sub_word(word):
     subbed_word = []
@@ -155,4 +134,6 @@ def aes_128(state, key):
 if __name__ == "__main__":
     state_to_encrypt = [[0x32, 0x43, 0xf6, 0xa8], [0x88, 0x5a, 0x30, 0x8d], [0x31, 0x31, 0x98, 0xa2], [0xe0, 0x37, 0x07, 0x34]]
     key_to_use = [0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c]
-    show_state(aes_128(state_to_encrypt,key_to_use))
+    ciphertext = aes_128(state_to_encrypt,key_to_use)
+    show_state(ciphertext, False)
+    show_state_dec(ciphertext)
