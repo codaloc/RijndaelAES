@@ -3,9 +3,9 @@
 
 `key_expansion.py` - 128 bits key expansion/scheduling, 11 round keys / 44 round words
 
-`aes_encrypt_pure` - 128-aes, one state
+`aes_encrypt_pure.py` - 128-aes, one state
 
-`sha256` - Secure Hash Algorithm 256 bits, supports >512 bits
+`sha256.py` - Secure Hash Algorithm 256 bits, supports >512 bits
 
 `aes_decrypt.py` and `aes_encrypt.py` use the `PyCryptodome` package as a comparison. <br>
 ```python
