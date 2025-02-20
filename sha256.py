@@ -92,6 +92,6 @@ def sha256(message):
 
 
 
-message = b"https://emn178.github.io/online-tools/sha256.htmlhttps://emn178.github.io/online-tools/sha256.html"
+message = "Testing String!! à".encode()
 print(sha256(message))
 
