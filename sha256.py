@@ -80,7 +80,8 @@ def sha256(message):
     h6 = 0x1f83d9ab
     h7 = 0x5be0cd19
 
-    padded_message = bit_pad(message)
+    encoded_message = message.encode()
+    padded_message = bit_pad(encoded_message)
     # print(f"Number of blocks: {len(padded_message*8)/512}")
 
     for first_word_in_block in range(0, len(padded_message), 64):
@@ -90,8 +91,9 @@ def sha256(message):
     hash_value = '{:08x}{:08x}{:08x}{:08x}{:08x}{:08x}{:08x}{:08x}'.format(h0, h1, h2, h3, h4, h5, h6, h7)
     return hash_value
 
-
-
-message = "Testing String!! à".encode()
-print(sha256(message))
+if __name__ == "__main__":
+    message = "SHA-256"
+    print("String to digest : ")
+    print(message)
+    print(sha256(message))
 
