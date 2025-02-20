@@ -12,12 +12,20 @@ from key_expansion import expand_key_128_bits
 from aes_encrypt_pure import aes_128
 
 input_block = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
-key = [0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c]
+input_block = [[0x32, 0x43, 0xf6, 0xa8], [0x88, 0x5a, 0x30, 0x8d], [0x31, 0x31, 0x98, 0xa2], [0xe0, 0x37, 0x07, 0x34]]
 
+# Key expansion
 round_key_words = expand_key_128_bits(key)
+
+# Block encryption
 ciphertext = aes_128(input_block, key)
+
 show_state(ciphertext, False)
 show_state_dec(ciphertext)
+
+# Hashing
+print(f"sha-256 digest of 'SHA-256':\n{sha256('SHA-256')}")
+
 
 ```
 
@@ -30,6 +38,10 @@ show_state_dec(ciphertext)
   │ dc 11 85 97 │  │ 220 17  133 151 │
   │ 19 6a 0b 32 │  │ 25  106 11  50  │
   └─────────────┘  └──── base10 ─────┘
+
+  sha-256 digest of 'SHA-256': bbd07c4fc02c99b97124febf42c7b63b5011c0df28d409fbb486b5a9d2e615ea
+
+
 ```
 
 ### References
@@ -38,3 +50,5 @@ https://csrc.nist.gov/files/pubs/fips/197/final/docs/fips-197.pdf
 https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
 
 https://en.wikipedia.org/wiki/AES_key_schedule
+
+https://en.wikipedia.org/wiki/SHA-2
