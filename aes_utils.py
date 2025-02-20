@@ -1,3 +1,22 @@
+
+def bit_pad(string):
+    original_length = len(string) * 8
+    string += b'\x80'
+
+    while ((len(string) * 8 + 64) % 512) != 0:
+        string += b"\x00"
+
+    big_endian_original_length = original_length.to_bytes(8, 'big')
+    string += big_endian_original_length
+
+    # print(string.hex())
+    # print(" ".join([bin(byte)[2:] for byte in string]))
+
+    return string
+
+
+##################### aes encryption specific #####################
+
 def get_hex_str(byte):
     hexa = hex(byte)[2:]
     while len(hexa) < 2:
